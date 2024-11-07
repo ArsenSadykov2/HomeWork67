@@ -25,28 +25,18 @@ export const counterSlice = createSlice({
         },
         check: (state,) => {
             if (state.value === rightPin) {
-                state.info = 'Access Granted';
-            } else {
-                state.info = 'Access Denied';
-            }
-        },
-        changeColor: (state) => {
-            if(state.info === 'Access Granted') {
+                state.info = 'Pin Granted';
                 state.status = 'Granted';
-            } else if(state.info === 'Access Denied') {
+            } else {
+                state.info = 'Pin Denied';
                 state.status = 'Denied';
             }
         },
         remove: (state) => {
             state.value = state.value.slice(0, -1);
         },
-        resetInput: (state) => {
-            state.value = '';
-            state.info = '';
-            state.status = '';
-        },
     },
 });
 
 export const counterReducer = counterSlice.reducer;
-export const {increaseByNumber, check,changeColor, resetInput, remove} = counterSlice.actions;
+export const {increaseByNumber, check, remove} = counterSlice.actions;

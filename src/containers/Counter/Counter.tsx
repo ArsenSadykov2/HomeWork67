@@ -1,25 +1,24 @@
 import {useDispatch, useSelector} from "react-redux";
-import {increaseByNumber, check, changeColor, remove, resetInput} from "./counterSlice.ts";
+import {increaseByNumber, check, remove, } from "./counterSlice.ts";
 import {RootState} from "../../app/store.ts";
 
 
 const Counter = () => {
     const value = useSelector((state: RootState) => state.counter.value);
     const status = useSelector((state: RootState) => state.counter.status);
-    // const info = useSelector((state: RootState) => state.counter.value);
+    const info = useSelector((state: RootState) => state.counter.info);
     const dispatch = useDispatch();
     const clickOnBtn = (key: string) => {
         if (key === 'E') {
             dispatch(check());
-            dispatch(changeColor());
-            dispatch(resetInput());
         }
     };
 
 
     return (
         <div className="container">
-            <div className={`${status}`}>
+            <div className="message"><p>{info}</p></div>
+            <div className={`${String(status)}`}>
                 {Array.from({length: 4}).map((_, index) => (
                     <span key={index}>
                         {value[index] ? '*' : ''}
@@ -35,8 +34,6 @@ const Counter = () => {
                 <button onClick={() => dispatch(increaseByNumber(0))}>{'0'}</button>
                 <button onClick={() => clickOnBtn('E')}>E</button>
             </div>
-
-
         </div>
     );
 };
