@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {decrease, increase, increaseByNumber} from "./counterSlice.ts";
+import {increaseByNumber, check, removeChar, resetInput} from "./counterSlice.ts";
 import {RootState} from "../../app/store.ts";
 
 
@@ -10,9 +10,9 @@ const Counter = () => {
         <div>
             {counterValue}
             <hr/>
-            <button onClick={() => dispatch(increase())}>Increase + 1</button>
+            <button onClick={() => dispatch(removeChar())}><strong>{'<'}</strong></button>
             <button onClick={() => dispatch(increaseByNumber(5))}>Increase + 5</button>
-            <button onClick={() => dispatch(decrease())}>Decrease - 1</button>
+            <button onClick={() => dispatch(check(), resetInput())}>E</button>
 
         </div>
     );
