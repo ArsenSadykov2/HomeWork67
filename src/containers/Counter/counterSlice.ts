@@ -2,17 +2,17 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface ICounterState {
     value: string ;
+    info: string;
     status: string;
-    message: string;
 }
 
 const initialState: ICounterState = {
     value: '',
+    info: '',
     status: '',
-    message: '',
 };
 
-const correctPin = '1337';
+const rightPin = '4444';
 
 export const counterSlice = createSlice({
     name: 'counter',
@@ -23,25 +23,30 @@ export const counterSlice = createSlice({
                 state.value += action.payload;
             }
         },
-        check: (state) => {
-            if (state.value === correctPin) {
-                state.status = 'success';
-                state.message = 'Access Granted';
+        check: (state,) => {
+            if (state.value === rightPin) {
+                state.info = 'Access Granted';
             } else {
-                state.status = 'error';
-                state.message = 'Access Denied';
+                state.info = 'Access Denied';
             }
         },
-        removeChar: (state) => {
+        changeColor: (state) => {
+            if(state.info === 'Access Granted') {
+                state.status = 'Granted';
+            } else if(state.info === 'Access Denied') {
+                state.status = 'Denied';
+            }
+        },
+        remove: (state) => {
             state.value = state.value.slice(0, -1);
         },
         resetInput: (state) => {
             state.value = '';
+            state.info = '';
             state.status = '';
-            state.message = '';
         },
     },
 });
 
 export const counterReducer = counterSlice.reducer;
-export const {increaseByNumber, check, removeChar, resetInput} = counterSlice.actions;
+export const {increaseByNumber, check,changeColor, resetInput, remove} = counterSlice.actions;
